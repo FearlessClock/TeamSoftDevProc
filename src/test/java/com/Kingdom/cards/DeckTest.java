@@ -39,7 +39,7 @@ public class DeckTest {
 	@Test
 	public void GetCard(){
 		
-		int lenght = deck.Size(); // get initial size
+		int lenght = deck.Size(); // get initial sizes
 		Card first_card = deck.GetDeck().get(0); // get initial first card
 
 		Assert.assertEquals(first_card, deck.GetFirstCard());  // check if first card remove is the initial first card
