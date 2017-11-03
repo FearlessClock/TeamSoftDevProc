@@ -13,6 +13,7 @@ public class Dryad extends Card{
 		return ("You get a " + race + "\nPower : Steal a card in front of your opponent and add it in front of you without activating its power" );
 
 	}
+
 	public void power(){
 		// Need to have the class Kingdom
 		// Opponent Kingdom.remove
