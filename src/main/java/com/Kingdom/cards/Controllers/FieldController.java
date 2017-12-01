@@ -170,6 +170,7 @@ public class FieldController {
     @FXML
     private Label nmbrOfCardsPlayerAI;
 
+    
     @FXML
     public void initialize() {
         gamestate = GameState.init;
@@ -258,7 +259,7 @@ public class FieldController {
         if (!playerHasPlay) {
             if (playerTurn == PlayerTurn.player1) {
                 Card playedCard = player1.hand.playCard(button.getParent().getChildrenUnmodifiable().indexOf(button));
-                board.PlayCard(playedCard, deck, playerTurn, player1, playerAI);
+                board.PlayCard(playedCard, deck, playerTurn, player1, playerAI, false);
                 player1Field.getChildren().remove(button);
             }
         }
@@ -334,7 +335,9 @@ public class FieldController {
             }
         }
     }
+    public void setInfos(String msg){
 
+    }
     public void turnOfAI() {
         playerHasDrawn = false;
         playerHasPlay = false;
@@ -355,7 +358,7 @@ public class FieldController {
 
         // Play Card
         Card playedCard = playerAI.PlayCard();
-        board.PlayCard(playedCard, deck, playerTurn, player1, playerAI);
+        board.PlayCard(playedCard, deck, playerTurn, player1, playerAI, true);
 
         // Remove the card from the hand of the AI
         int playedCardIndex = -1;
