@@ -55,6 +55,43 @@ public class Board {
     public List<Card> getPlayerAICards() {
         return playerAICards;
     }
+    
+    public void addCard(Card card, FieldController.PlayerTurn playerTurn){
+    	 if (FieldController.PlayerTurn.player1 == playerTurn){
+    		 player1Cards.add(card);
+    	 }
+    	 else{
+    		 playerAICards.add(card);
+    	 }
+    }
+    
+    public void removeCard(Card card, FieldController.PlayerTurn playerTurn){
+    	if (FieldController.PlayerTurn.player1 == playerTurn){
+    		for (int i = 0; i < getPlayerAICards().size(); i++){
+    			if (playerAICards.get(i).GetRace() == card.GetRace()){
+    				playerAICards.remove(i);
+    			}
+    		}	
+	   	 }
+	   	 else{	
+	   		for (int i = 0; i < getPlayerAICards().size(); i++){
+    			if (player1Cards.get(i).GetRace() == card.GetRace()){
+    				player1Cards.remove(i);
+    			}
+    		}	
+    	 }
+    }
+    
+    public Card getCard(Integer index, FieldController.PlayerTurn playerTurn){
+    	Card card;
+    	if (FieldController.PlayerTurn.player1 == playerTurn){
+    		card = playerAICards.get(index);
+	   	 }
+	   	 else{	
+	   		card = player1Cards.get(index);
+    	 }
+    	return card;
+    }
 
     //Play the chosen card for the current playerturns player
     public void PlayCard(Card card, Deck deck, FieldController.PlayerTurn playerTurn, Player p1, Player p2) {
@@ -91,22 +128,22 @@ public class Board {
             listingClass.add(i, 0);
         }
         for (Card c : playerboard) {
-            if (c.GetRace() == "Dryad") {
+            if ("Dryad".equals(c.GetRace())) {
                 listingClass.set(0, listingClass.get(0) + 1);
             }
-            if (c.GetRace() == "Elf") {
+            if ("Elf".equals(c.GetRace())) {
                 listingClass.set(1, listingClass.get(1) + 1);
             }
-            if (c.GetRace() == "Gnome") {
+            if ("Gnome".equals(c.GetRace())) {
                 listingClass.set(2, listingClass.get(2) + 1);
             }
-            if (c.GetRace() == "Goblin") {
+            if ("Goblin".equals(c.GetRace())) {
                 listingClass.set(3, listingClass.get(3) + 1);
             }
-            if (c.GetRace() == "Korrigan") {
+            if ("Korrigan".equals(c.GetRace())) {
                 listingClass.set(4, listingClass.get(4) + 1);
             }
-            if (c.GetRace() == "Troll") {
+            if ("Troll".equals(c.GetRace())) {
                 listingClass.set(5, listingClass.get(5) + 1);
             }
         }
