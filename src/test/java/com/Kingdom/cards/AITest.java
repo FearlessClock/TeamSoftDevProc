@@ -1,64 +1,78 @@
 package com.Kingdom.cards;
 
 import com.Kingdom.cards.Model.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 public class AITest {
-	AI playerAI;
-	Deck deck;
+    AI playerAI;
+    Deck deck;
 
-	@Before
-	public void setUp() throws Exception {
-		playerAI = new AI();
-		deck = new Deck(8);
-	}
+    @Before
+    public void setUp() throws Exception {
+        playerAI = new AI();
+        deck = new Deck(8);
+    }
 
-	@Test
-	public void Draw() {
-		int sizeDeck = deck.Size(); // deck size before draw card
-		int sizeHand = playerAI.SizeHand(); // hand size before draw card
+    @Test
+    public void Draw() {
+        int sizeDeck = deck.Size(); // deck size before draw card
+        int sizeHand = playerAI.SizeHand(); // hand size before draw card
 
-		playerAI.Draw(deck); // draw card
+        playerAI.Draw(deck); // draw card
 
-		Assert.assertEquals(sizeDeck - 1, deck.Size()); // test if card remove
-														// from deck
-		Assert.assertEquals(sizeHand + 1, playerAI.SizeHand()); // test if card
-																// add to hand
-	}
+        Assert.assertEquals(sizeDeck - 1, deck.Size()); // test if card remove
+                                                        // from deck
+        Assert.assertEquals(sizeHand + 1, playerAI.SizeHand()); // test if card
+                                                                // add to hand
+    }
 
-	@Test
-	public void PlayCard() {
-		for (int i = 0; i < 5; i++) { // Draw 5 cards in hand of playerAI
-			playerAI.Draw(deck);
-		}
-		int sizeHand = playerAI.SizeHand();
-		Card card1 = playerAI.PlayCard(); // Get the first card (we will play it
-											// for test)
+    @Test
+    public void PlayCard() {
+        for (int i = 0; i < 5; i++) { // Draw 5 cards in hand of playerAI
+            playerAI.Draw(deck);
+        }
+        int sizeHand = playerAI.SizeHand();
+        Card card1 = playerAI.PlayCard(); // Get the first card (we will play it
+                                          // for test)
 
-		// Assert.assertEquals(true, playerAI.board.contains(card1)); // Test if
-		// card1 is place on board
-		Assert.assertEquals(sizeHand - 1, playerAI.SizeHand()); // Test if size
-																// of hand
-																// decrease
-		// Assert.assertEquals(sizeBoard + 1, playerAI.SizeBoard()); // Test if
-		// size of board increase
-	}
+        // Assert.assertEquals(true, playerAI.board.contains(card1)); // Test if
+        // card1 is place on board
+        Assert.assertEquals(sizeHand - 1, playerAI.SizeHand()); // Test if size of hand decrease
+    }
 
-	@Test
-	public void ScoreBoard() {
-		while (!deck.IsEmpty()) {
-			playerAI.Draw(deck);
-		}
-		playerAI.PlayCard(); // Play 1 card => score = 1
-		// Assert.assertEquals(1, playerAI.ScoreBoard()); // Score after 1 card
-		// play
+    @Test
+    public void ScoreBoard() {
+        while (!deck.IsEmpty()) {
+            playerAI.Draw(deck);
+        }
+        playerAI.PlayCard(); // Play 1 card => score = 1
+        // Assert.assertEquals(1, playerAI.ScoreBoard()); // Score after 1 card
+        // play
 
-		// play one of each card => 1 (current) + 5 (number of cards) + 3 (bonus
-		// point)
+        // play one of each card => 1 (current) + 5 (number of cards) + 3 (bonus
+        // point)
 
-		// Assert.assertEquals(9, playerAI.ScoreBoard());
-	}
+        // Assert.assertEquals(9, playerAI.ScoreBoard());
+    }
+    
+    @Test
+    public void SetFields()
+    {
+        List<Card> boardCards = new ArrayList<Card>();
+        boardCards.add(new Gnome());
+        List<Card> boardCardsOpp = new ArrayList<Card>();
+        boardCards.add(new Elf());   
+        
+        playerAI.SetFields(boardCards, boardCardsOpp);
+        
+        Assert.assertEquals("Gnome", playerAI.getBoardCards().get(0).GetRace().toString());
+        Assert.assertEquals("Elf", playerAI.getBoardCardsOpp().get(0).GetRace().toString());
+    }
 
 }
